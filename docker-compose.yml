@@ -1,0 +1,33 @@
+version: '2'
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxx
+      MYSQL_DATABASE: xxxx
+    volumes:
+    - /var/lib/mysql
+  tcat:
+    image: cdssnc/dmi-tcat
+    environment:
+      ADMIN_PASSWORD: xxxx
+      ADMIN_USER: xxxx
+      CONSUMERKEY: xxxx
+      CONSUMERSECRET: xxxx
+      DB_DATABASE: xxxx
+      DB_HOST: mariadb
+      DB_PASSWORD: xxxx
+      DB_USERNAME: xxxx
+      SERVERNAME: xxxx.xxx.xxx
+      USERSECRET: xxxx
+      USERTOKEN: xxxx
+    volumes:
+    - /etc/localtime:/etc/localtime
+    - /dev/log:/dev/log
+    links:
+    - mariadb:mariadb
+    ports:
+    - 8000:8000/tcp
+    labels:
+      rap.port: '8000'
+      rap.host: xxxx.xxx.xxx
